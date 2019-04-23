@@ -5,22 +5,29 @@
 #include <string>
 #include <fstream>
 
+#include <vector>
+
 using namespace std;
 
 class gameMan{
 	public:
-		gameMan(){
+		gameMan() {
 			difficulty = 1;
 		}
 		gameMan(int h){
 			difficulty = h;
 		}
+		
+		void openFile(int diff);
 		void saveFile();
 		void loadFile();
 		bool activeGame(); 
-
+		vector<string> wordArr;
+		
 	private:
 		int difficulty;
+		
+		
 	
 };
 
