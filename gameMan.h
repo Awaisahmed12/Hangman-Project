@@ -1,10 +1,9 @@
 #ifndef GAMEMAN_H
 #define GAMEMAN_H
-
 #include <iostream>
 #include <string>
 #include <fstream>
-
+#include "wordToSolve.h"
 #include <vector>
 
 using namespace std;
@@ -17,18 +16,23 @@ class gameMan{
 		gameMan(int h){
 			difficulty = h;
 		}
-		
-		void openFile(int diff);
+
+		void getWords(int diff);
 		void saveFile();
 		void loadFile();
-		bool activeGame(); 
+		void clearArr();
+		bool activeGame();
+		string pickWord();
 		vector<string> wordArr;
-		
+		wordToSolve gWord;
+		void printMenu(int o);
+
 	private:
 		int difficulty;
-		
-		
-	
+
+
+
+
 };
 
 
