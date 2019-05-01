@@ -9,8 +9,24 @@ wordToSolve::wordToSolve(string sWord) {
     }
 }
 
-void wordToSolve::solve(char letter) {
+wordToSolve::wordToSolve(string sWord, int sAttempts, vector<char> sUnderscore, vector<char> sGuesses) {
+    word = sWord;
+    attempts = sAttempts;
+
+    for (int i = 0; i < sUnderscore.size(); i++) {
+        underscore.push_back(sUnderscore[i]);
+    }
+
+    for (int i = 0; i < sGuesses.size(); i++) {
+        guesses.push_back(sGuesses[i]);
+    }
+
+
+
+}
+bool wordToSolve::solve(char letter) {
     bool isFound = false;
+    bool underscoreFound = false;
     bool guessFound = false;
 
 
@@ -36,7 +52,15 @@ void wordToSolve::solve(char letter) {
         }
     }
 
-    return;
+    for (int i = 0; i < underscore.size(); i++) {
+        if (underscore[i] == '_') {
+            underscoreFound = true;
+            break;
+        }
+    }
+
+    if (!underscoreFound) {return true;}
+    else {return false;}
 }
 
 wordToSolve &wordToSolve::operator=(wordToSolve& otherWord) {
@@ -77,5 +101,98 @@ bool wordToSolve::Solved() {
 }
 
 void wordToSolve::printHangman(int o) {
+    switch (o) {
+        case 0:
+            cout << "      ___________  " << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "      ___________  " << endl << endl;
+            break;
+        case 1:
+            cout << "      ___________  " << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      O         |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "      ___________  " << endl << endl;
+            break;
+        case 2:
+            cout << "      ___________  " << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      O         |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "      ___________  " << endl << endl;
+            break;
+        case 3:
+            cout << "      ___________  " << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      O         |  "  << endl;
+            cout << "     \\|         |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "      ___________  " << endl << endl;
+            break;
+        case 4:
+            cout << "      ___________  " << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      O         |  "  << endl;
+            cout << "     \\|/        |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "      ___________  " << endl << endl;
+            break;
+        case 5:
+            cout << "      ___________  " << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      O         |  "  << endl;
+            cout << "     \\|/        |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "     /          |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "      ___________  " << endl << endl;
+            break;
+        case 6:
+            cout << "      ___________  " << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "      O         |  "  << endl;
+            cout << "     \\|/        |  "  << endl;
+            cout << "      |         |  "  << endl;
+            cout << "     / \\        |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "                |  "  << endl;
+            cout << "      ___________  " << endl << endl;
+            break;
+    }
 
 }
