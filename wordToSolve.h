@@ -13,7 +13,8 @@ class wordToSolve {
 		}
 
         wordToSolve(string sWord);
-        void solve(char letter);
+        wordToSolve(string sWord, int sAttempts, vector<char> sUnderscore, vector<char> sGuesses);
+        bool solve(char letter);
         int getAttempts(){return attempts;}
         void printUnderscores();
         void printGuesses();
