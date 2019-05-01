@@ -10,15 +10,10 @@ using namespace std;
 
 class gameMan{
 	public:
-		gameMan() {
-			difficulty = 1;
-		}
-		gameMan(int h){
-			difficulty = h;
-		}
-
+		gameMan() {difficulty = 1;}
+		gameMan(int h){difficulty = h;}
 		void getWords(int diff);
-		void saveFile();
+		void saveFile(bool isSolved);
 		void loadFile();
 		void clearArr();
 		bool activeGame();
