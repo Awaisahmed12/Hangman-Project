@@ -49,6 +49,43 @@ void gameMan::getWords(int diff){
 
 }
 
+void gameMan::loadFile() {
+    string lWord;
+    vector<char> sUnderscore;
+    vector<char> sGuesses;
+    int lAttempts;
+    char elem;
+
+
+    if (activeGame()) {
+        ifstream inputFile;
+        inputFile.open("save.txt");
+
+        inputFile >> lWord;
+        inputFile >> lAttempts;
+
+        while (inputFile >> elem) {
+
+            if (elem == '|') {break;}
+            sGuesses.push_back(elem);
+        }
+
+        while (inputFile >> elem) {
+            sUnderscore.push_back(elem);
+        }
+
+        wordToSolve loadedSave(lWord, lAttempts, sUnderscore, sGuesses);
+        gWord = loadedSave;
+
+        inputFile.close();
+    } else {
+        cout << "No save data found!" << endl;
+    }
+
+
+
+}
+
 bool gameMan::activeGame() {
 	ifstream inputFile;
 
@@ -63,10 +100,16 @@ bool gameMan::activeGame() {
 	inputFile.close();
 }
 
-void gameMan::saveFile(){
+void gameMan::saveFile(bool isSolved){
 	ofstream outputFile;
 
 	outputFile.open("save.txt");
+
+	if (isSolved) {
+            outputFile << "";
+            outputFile.close();
+            return;
+	}
 
 	outputFile << gWord.getWord() << endl << gWord.getAttempts() << endl;
 
@@ -74,7 +117,7 @@ void gameMan::saveFile(){
         outputFile << gWord.getGuesses()[i] << " ";
 	}
 
-	outputFile << endl;
+	outputFile << "|" << endl;
 
 	for (int i = 0; i < gWord.getUnderscore().size(); i++) {
         outputFile << gWord.getUnderscore()[i] << " ";
@@ -112,6 +155,7 @@ void gameMan::printMenu(int o){
             cout << "Your option: ";
             break;
         case 1:
+            cout << endl;
             cout.width(28);
             cout.fill('*');
             cout << "" << endl;
@@ -127,12 +171,36 @@ void gameMan::printMenu(int o){
         case 2:
             cout.width(28);
             cout.fill('*');
-            cout << endl << "Enter '$' at any time to save and exit." << endl;
+            cout << endl << "" << endl;
+            cout << "Enter '$' at any time to save and exit." << endl;
             cout << "Guesses: ";
             gWord.printGuesses();
             cout << endl << endl;
             gWord.printUnderscores();
             cout << "Your guess: ";
+            break;
+        case 3:
+            cout.width(28);
+            cout.fill('*');
+            cout << "" << endl;
+            cout.fill('*');
+            cout.width(28);
+            cout << "********  You won!  ********" << endl;
+            cout.width(28);
+            cout.fill('*');
+            cout << "" << endl;
+            break;
+        case 4:
+            cout.width(28);
+            cout.fill('*');
+            cout << "" << endl;
+            cout.fill('*');
+            cout.width(28);
+            cout << "********  You lost!  *******" << endl;
+            cout.width(28);
+            cout.fill('*');
+            cout << "" << endl;
+            break;
 
     }
 
