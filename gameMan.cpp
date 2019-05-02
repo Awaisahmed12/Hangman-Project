@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <time.h>
+
 using namespace std;
 
 class FileNotFound {};
@@ -49,7 +50,7 @@ void gameMan::getWords(int diff){
 
 }
 
-void gameMan::loadFile() {
+bool gameMan::loadFile() {
     string lWord;
     vector<char> sUnderscore;
     vector<char> sGuesses;
@@ -77,9 +78,13 @@ void gameMan::loadFile() {
         wordToSolve loadedSave(lWord, lAttempts, sUnderscore, sGuesses);
         gWord = loadedSave;
 
+        return true;
+
         inputFile.close();
     } else {
         cout << "No save data found!" << endl;
+        cout << "Defaulting to new game..." << endl;
+        return false;
     }
 
 
@@ -88,28 +93,28 @@ void gameMan::loadFile() {
 
 bool gameMan::activeGame() {
 	ifstream inputFile;
+	bool result;
 
 	inputFile.open("save.txt");
 
-	if (inputFile.eof()) {
-		return false;
-	} else {
-		return true;
-	}
-
+    result = inputFile.eof();
 	inputFile.close();
+
+	return result;
 }
 
 void gameMan::saveFile(bool isSolved){
 	ofstream outputFile;
 
-	outputFile.open("save.txt");
+
 
 	if (isSolved) {
-            outputFile << "";
+            outputFile.open("save.txt", ofstream::out | ofstream::trunc);
             outputFile.close();
             return;
 	}
+
+	outputFile.open("save.txt");
 
 	outputFile << gWord.getWord() << endl << gWord.getAttempts() << endl;
 
@@ -143,6 +148,7 @@ void gameMan::printMenu(int o){
 
     switch (o) {
         case 0:
+            cout << endl << endl;
             cout << "       *Hangman Game*       " << endl << endl;
             cout << "          RULES:            " << endl;
             cout << "   You get six attempts to  " << endl;
