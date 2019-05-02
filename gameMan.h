@@ -8,13 +8,15 @@
 
 using namespace std;
 
+
+
 class gameMan{
 	public:
 		gameMan() {difficulty = 1;}
 		gameMan(int h){difficulty = h;}
 		void getWords(int diff);
 		void saveFile(bool isSolved);
-		void loadFile();
+		bool loadFile();
 		void clearArr();
 		bool activeGame();
 		string pickWord();
